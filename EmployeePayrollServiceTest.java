@@ -1,0 +1,26 @@
+package com.bridgelab.javaIO;
+
+import static org.junit.Assert.assertEquals;
+import java.util.Arrays;
+import org.junit.Test;
+
+import com.bridgelab.javaIO.EmployeePayrollService.IOService;
+
+public class EmployeePayrollServiceTest {
+	@Test
+	public void  givenEmployeeReturnEntryCount() {
+		EmployeePayrollData[] arrOfEmp = {
+				new EmployeePayrollData(1, "Jeff", 100.0),
+                new EmployeePayrollData(2, "Bill", 200.0),
+                new EmployeePayrollData(3, "Mark", 300.0)
+		};
+		EmployeePayrollService empService;
+		empService = new EmployeePayrollService(Arrays.asList(arrOfEmp));
+        empService.writeEmployeePayrollData(IOService.FILE_IO);
+        empService.printData(IOService.FILE_IO);   
+        long entries = empService.countEntries(IOService.FILE_IO);
+        System.out.println(entries);
+        assertEquals(3, entries);
+	}
+
+}

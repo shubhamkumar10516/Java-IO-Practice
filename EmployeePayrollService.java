@@ -4,6 +4,10 @@ import java.util.*;
 
 public class EmployeePayrollService 
 {
+	// enum of io services
+	enum IOService {
+		CONSOLE_IO,FILE_IO
+	}
     //list of employee
 	private List<EmployeePayrollData> employeePayrollList;
 	
@@ -25,19 +29,25 @@ public class EmployeePayrollService
 	}
 	
 	// output on the console
-	private void writeEmployeePayrollData() {
+	public void writeEmployeePayrollData(IOService ioService) {
+		if(ioService.equals(IOService.CONSOLE_IO)) {
 		System.out.println("employee details :: ");
 		for(EmployeePayrollData e : employeePayrollList) {
 			e.display();
+		}}
+		else if(ioService.equals(IOService.FILE_IO)) {
+			new EmployeePayrolFileIOService().writeData(employeePayrollList);
 		}
 	}
-	public static void main(String[] args) {
-		List<EmployeePayrollData>  employeePayrollList = new ArrayList<>();
-		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
-		//input stream
-		Scanner consoleInputReader = new Scanner(System.in);
-		employeePayrollService.readEmployeePayrollData(consoleInputReader);
-		employeePayrollService.writeEmployeePayrollData();
-		
+
+	public void printData(IOService ioServices) {
+	    if(ioServices.equals(IOService.FILE_IO))
+	    	new EmployeePayrolFileIOService().printData();
+	}
+
+	public long countEntries(IOService fileIo) {
+		if(fileIo.equals(IOService.FILE_IO))
+			return new EmployeePayrolFileIOService().countEntries();
+		return 0;
 	}
 }
