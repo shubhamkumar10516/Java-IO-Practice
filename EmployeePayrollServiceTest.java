@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.bridgelab.javaIO.EmployeePayrollService.IOService;
 
 public class EmployeePayrollServiceTest {
+	// Testing entry count
 	@Test
 	public void  givenEmployeeReturnEntryCount() {
 		EmployeePayrollData[] arrOfEmp = {

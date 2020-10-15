@@ -11,6 +11,7 @@ import java.util.*;
 public class EmployeePayrolFileIOService {
 	public static String PAYROLL_FILE_NAME = "payroll-file.txt";
 
+	// Writing list of data to file
 	public void writeData(List<EmployeePayrollData> employeePayrollList) {
 		StringBuffer empBuffer = new StringBuffer();
 		employeePayrollList.forEach(employee -> {
@@ -24,6 +25,7 @@ public class EmployeePayrolFileIOService {
 		}
 	}
 
+	// printing the lines of file
 	public void printData() {
 		try {
 			Files.lines(new File(PAYROLL_FILE_NAME).toPath()).forEach(System.out::println);
@@ -32,6 +34,7 @@ public class EmployeePayrolFileIOService {
 		}
 	}
 
+	//counting the entries of file
 	public long countEntries() {
 		int entries = 0;
 		try {

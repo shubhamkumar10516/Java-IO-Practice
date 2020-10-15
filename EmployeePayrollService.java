@@ -12,7 +12,6 @@ public class EmployeePayrollService
 	private List<EmployeePayrollData> employeePayrollList;
 	
 	public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
-		
 		this.employeePayrollList = employeePayrollList;
 	}
 	
@@ -39,12 +38,14 @@ public class EmployeePayrollService
 			new EmployeePayrolFileIOService().writeData(employeePayrollList);
 		}
 	}
-
+    
+	// print data according io services
 	public void printData(IOService ioServices) {
 	    if(ioServices.equals(IOService.FILE_IO))
 	    	new EmployeePayrolFileIOService().printData();
 	}
 
+	// counting the entries
 	public long countEntries(IOService fileIo) {
 		if(fileIo.equals(IOService.FILE_IO))
 			return new EmployeePayrolFileIOService().countEntries();
