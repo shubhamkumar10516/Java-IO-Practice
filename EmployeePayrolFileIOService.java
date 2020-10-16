@@ -15,7 +15,7 @@ public class EmployeePayrolFileIOService {
 	public void writeData(List<EmployeePayrollData> employeePayrollList) {
 		StringBuffer empBuffer = new StringBuffer();
 		employeePayrollList.forEach(employee -> {
-			String employeeDataString = employee.toString().concat("\n");
+			String employeeDataString = employee.display().concat("\n");
 			empBuffer.append(employeeDataString);
 		});
 		try {
@@ -34,7 +34,7 @@ public class EmployeePayrolFileIOService {
 		}
 	}
 
-	//counting the entries of file
+	// counting the entries of file
 	public long countEntries() {
 		int entries = 0;
 		try {
@@ -44,4 +44,22 @@ public class EmployeePayrolFileIOService {
 		}
 		return entries;
 	}
+
+	// read data
+	public List<EmployeePayrollData> readData() {
+		List<EmployeePayrollData> empList = new ArrayList<EmployeePayrollData>();
+		try {
+			Files.lines(new File(PAYROLL_FILE_NAME).toPath()).map(line -> line.trim()).forEach(line -> {
+				String[] str = line.split(":");
+				int id = Integer.parseInt(str[0]);
+				String name = str[1];
+				double salary = Double.parseDouble(str[2]);
+				empList.add(new EmployeePayrollData(id, name, salary));
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return empList;
+	}
+
 }

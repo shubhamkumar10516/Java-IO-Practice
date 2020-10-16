@@ -15,6 +15,10 @@ public class EmployeePayrollService
 		this.employeePayrollList = employeePayrollList;
 	}
 	
+	public EmployeePayrollService() {
+		// TODO Auto-generated constructor stub
+	}
+
 	// takes input from console
 	private void readEmployeePayrollData(Scanner consoleInputReader) {
 		System.out.println("Enter emp Id: ");
@@ -50,5 +54,12 @@ public class EmployeePayrollService
 		if(fileIo.equals(IOService.FILE_IO))
 			return new EmployeePayrolFileIOService().countEntries();
 		return 0;
+	}
+	
+	public long readEmployeePayrollData(IOService ioService) {
+		if(ioService.equals(IOService.FILE_IO)) {
+			this.employeePayrollList = new EmployeePayrolFileIOService().readData(); 
+		}
+		return this.employeePayrollList.size();
 	}
 }

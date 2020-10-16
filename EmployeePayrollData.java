@@ -10,7 +10,7 @@ public class EmployeePayrollData {
 		this.name = name;
 		this.salary = salary;
 	}
-	public void display() {
-		System.out.println(id+" : "+ name+ " : "+ salary);
+	public String display() {
+	     return (id+":"+ name+ ":"+ salary);
 	}
 }
